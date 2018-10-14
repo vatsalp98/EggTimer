@@ -19,6 +19,15 @@ public class MainActivity extends AppCompatActivity {
     Boolean counterIsActive  = false;
     CountDownTimer countDownTimer;
 
+    public void resetTimer(){
+        timerTextView.setText("0:30");
+        timerSeekBar.setProgress(30);
+        countDownTimer.cancel();
+        controllerButton.setText("GO");
+        timerSeekBar.setEnabled(true);
+        counterIsActive = false;
+    }
+
     public void updateTimer(int secondsLeft){
 
         int minutes = (int) secondsLeft / 60;
@@ -52,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onFinish() {
 
-                    timerTextView.setText("0:00");
+                    resetTimer();
                     MediaPlayer mplayer = MediaPlayer.create(getApplicationContext(), R.raw.airhorn);
                     mplayer.start();
                 }
@@ -61,12 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         else {
-            timerTextView.setText("0:30");
-            timerSeekBar.setProgress(30);
-            countDownTimer.cancel();
-            controllerButton.setText("GO");
-            timerSeekBar.setEnabled(true);
-            counterIsActive = false;
+            resetTimer();
         }
     }
 
